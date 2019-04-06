@@ -1,0 +1,231 @@
+     ┌────────────────────────────────────────────────────────────────────┐
+     │                        • MobaXterm 10.4 •                          │
+     │            (SSH client, X-server and networking tools)             │
+     │                                                                    │
+     │ ➤ SSH session to lee@139.180.206.24                                │
+     │   • SSH compression : ✔                                            │
+     │   • SSH-browser     : ✔                                            │
+     │   • X11-forwarding  : ✘  (disabled or not supported by server)     │
+     │   • DISPLAY         : 121.235.223.203:0.0                          │
+     │                                                                    │
+     │ ➤ For more info, ctrl+click on help or visit our website           │
+     └────────────────────────────────────────────────────────────────────┘
+
+Last login: Fri Apr  5 14:15:00 2019 from 121.235.223.203
+[lee@vultr ~]$ cd work2/Pointer_on_C/C4/
+[lee@vultr C4]$ ls
+copy.c  include  main.c  main.o  Makefile  prime.c  prime.o  square.c  square.o  test
+
+[lee@vultr C4]$ make
+gcc -Werror -Iinclude -std=c99 -c -o main.o main.c -MD -MF .main.o.d
+In file included from main.c:4:
+include/prime.h:5: error: expected ‘;’, ‘,’ or ‘)’ before numeric constant
+cc1: warnings being treated as errors
+main.c: In function ‘main’:
+main.c:21: error: implicit declaration of function ‘prime’
+main.c:23: error: expected expression before ‘]’ token
+make: *** [main.o] Error 1
+
+[lee@vultr C4]$ make
+gcc -Werror -Iinclude -std=c99 -c -o main.o main.c -MD -MF .main.o.d
+In file included from main.c:4:
+include/prime.h:4: error: expected ‘;’, ‘,’ or ‘)’ before numeric constant
+cc1: warnings being treated as errors
+main.c: In function ‘main’:
+main.c:21: error: implicit declaration of function ‘prime’
+make: *** [main.o] Error 1
+[lee@vultr C4]$ make
+gcc -Werror -Iinclude -std=c99 -c -o main.o main.c -MD -MF .main.o.d
+gcc -Werror -Iinclude -std=c99 -c -o prime.o prime.c -MD -MF .prime.o.d
+prime.c:5: error: expected ‘;’, ‘,’ or ‘)’ before numeric constant
+make: *** [prime.o] Error 1
+//实在检测无问题的话，或者已经改过但还是报相同的错误，全部删除重新编译
+
+
+[lee@vultr C4]$ ls
+copy.c  include  main.c  main.o  Makefile  prime.c  prime.o  square.c  square.o  test
+[lee@vultr C4]$ make
+gcc -Werror -Iinclude -std=c99 -c -o main.o main.c -MD -MF .main.o.d
+gcc -Werror -Iinclude -std=c99 -c -o prime.o prime.c -MD -MF .prime.o.d
+gcc -Werror -Iinclude -std=c99 -c -o square.o square.c -MD -MF .square.o.d
+gcc -Werror -Iinclude -std=c99 -c -o copy.o copy.c -MD -MF .copy.o.d
+gcc -o test main.o prime.o square.o copy.o
+[lee@vultr C4]$ ./
+include/ test
+[lee@vultr C4]$ ./
+include/ test
+[lee@vultr C4]$ ./test
+double's sizeof is :8
+float's sizeof is :4
+
+/square.c---------------------------------------
+this is 1 loop,result1  is :284.000000
+this is 2 loop,result2  is :142.998239
+this is 3 loop,result3  is :73.481662
+this is 4 loop,result4  is :40.598936
+this is 5 loop,result5  is :27.282410
+this is 6 loop,result6  is :24.032516
+this is 7 loop,result7  is :23.812776
+this is 8 loop,result8  is :23.811762
+this is 9 loop,result9  is :23.811762
+this is 10 loop,result10  is :23.811762
+
+ the end result is 23.811762
+/prime.c---------------------------------------
+this is 1 prime :2
+this is 2 prime :3
+this is 3 prime :5
+this is 4 prime :7
+this is 5 prime :11
+this is 6 prime :13
+this is 7 prime :17
+this is 8 prime :19
+this is 9 prime :23
+this is 10 prime :29
+this is 11 prime :31
+this is 12 prime :37
+this is 13 prime :41
+this is 14 prime :43
+this is 15 prime :47
+this is 16 prime :53
+this is 17 prime :59
+this is 18 prime :61
+this is 19 prime :67
+this is 20 prime :71
+this is 21 prime :73
+this is 22 prime :79
+this is 23 prime :83
+this is 24 prime :89
+this is 25 prime :97
+/copy_n.c---------------------------------------
+Segmentation fault（段错误）//通常是1.指针指向错误导致的；2:形参需要的是一个指针，但是实参传递一个指针指向的数，函数在调用时将
+指向的值作为地址去访问自然就会有段错误
+[lee@vultr C4]$ make
+gcc -Werror -Iinclude -std=c99 -c -o main.o main.c -MD -MF .main.o.d
+cc1: warnings being treated as errors
+main.c: In function ‘main’:
+main.c:23: error: passing argument 1 of ‘copy_n’ makes pointer from integer without a cast
+include/copy.h:5: note: expected ‘char *’ but argument（实际参数） is of type ‘char’
+make: *** [main.o] Error 1
+
+[lee@vultr C4]$ make
+gcc -Werror -Iinclude -std=c99 -c -o main.o main.c -MD -MF .main.o.d
+cc1: warnings being treated as errors
+main.c: In function ‘main’:
+main.c:24: error: passing argument 1 of ‘copy_n’ makes pointer from integer without a cast
+include/copy.h:5: note: expected ‘char *’ but argument is of type ‘char’
+main.c:24: error: passing argument 2 of ‘copy_n’ makes pointer from integer without a cast
+include/copy.h:5: note: expected ‘char *’ but argument is of type ‘char’
+make: *** [main.o] Error 1
+//声明需要的参数类型于实际传递的参数类型不符
+[lee@vultr C4]$ make
+gcc -Werror -Iinclude -std=c99 -c -o main.o main.c -MD -MF .main.o.d
+gcc -o test main.o prime.o square.o copy.o
+[lee@vultr C4]$ ./test
+double's sizeof is :8
+float's sizeof is :4
+
+/square.c---------------------------------------
+this is 1 loop,result1  is :284.000000
+this is 2 loop,result2  is :142.998239
+this is 3 loop,result3  is :73.481662
+this is 4 loop,result4  is :40.598936
+this is 5 loop,result5  is :27.282410
+this is 6 loop,result6  is :24.032516
+this is 7 loop,result7  is :23.812776
+this is 8 loop,result8  is :23.811762
+this is 9 loop,result9  is :23.811762
+this is 10 loop,result10  is :23.811762
+
+ the end result is 23.811762
+/prime.c---------------------------------------
+this is 1 prime :2
+this is 2 prime :3
+this is 3 prime :5
+this is 4 prime :7
+this is 5 prime :11
+this is 6 prime :13
+this is 7 prime :17
+this is 8 prime :19
+this is 9 prime :23
+this is 10 prime :29
+this is 11 prime :31
+this is 12 prime :37
+this is 13 prime :41
+this is 14 prime :43
+this is 15 prime :47
+this is 16 prime :53
+this is 17 prime :59
+this is 18 prime :61
+this is 19 prime :67
+this is 20 prime :71
+this is 21 prime :73
+this is 22 prime :79
+this is 23 prime :83
+this is 24 prime :89
+this is 25 prime :97
+/copy_n.c---------------------------------------
+Segmentation fault（段错误）//通常是1.指针指向错误导致的；2:形参需要的是一个指针，但是实参传递一个指针指向的数，函数在调用时将
+指向的值作为地址去访问自然就会有段错误
+
+[lee@vultr C4]$ make
+gcc -Werror -Iinclude -std=c99 -c -o main.o main.c -MD -MF .main.o.d
+gcc -Werror -Iinclude -std=c99 -c -o copy.o copy.c -MD -MF .copy.o.d
+copy.c: In function ‘copy_n’:
+copy.c:7: error: expected expression before ‘]’ token
+copy.c:8: error: expected expression before ‘]’ token
+make: *** [copy.o] Error 1
+sizeof的操作符必须是一个表达式
+[lee@vultr C4]$ make
+gcc -Werror -Iinclude -std=c99 -c -o main.o main.c -MD -MF .main.o.d
+gcc -Werror -Iinclude -std=c99 -c -o copy.o copy.c -MD -MF .copy.o.d
+copy.c: In function ‘copy_n’:
+copy.c:7: error: ‘d_nu’ undeclared (first use in this function)
+copy.c:7: error: (Each undeclared identifier is reported only once
+copy.c:7: error: for each function it appears in.)
+copy.c:8: error: ‘s_nu’ undeclared (first use in this function)
+make: *** [copy.o] Error 1
+注意宏定义的声明的位置，在使用前源文件必须在其宏定义或头文件中找到它的声明位置
+
+[lee@vultr C4]$ make
+gcc -Werror -Iinclude -std=c99 -c -o copy.o copy.c -MD -MF .copy.o.d
+cc1: warnings being treated as errors
+copy.c: In function ‘copy_n’:
+copy.c:19: error: comparison between pointer and integer
+copy.c:28: error: assignment makes integer from pointer without a cast
+make: *** [copy.o] Error 1
+//要注意指针在运算过程中的类型转换
+[lee@vultr C4]$ make
+gcc -Werror -Iinclude -std=c99 -c -o copy.o copy.c -MD -MF .copy.o.d
+copy.c: In function ‘copy_n’:
+copy.c:21: error: ‘i’ undeclared (first use in this function)
+copy.c:21: error: (Each undeclared identifier is reported only once
+copy.c:21: error: for each function it appears in.)
+cc1: warnings being treated as errors
+copy.c:23: error: assignment makes integer from pointer without a cast
+copy.c:31: error: assignment makes integer from pointer without a cast
+make: *** [copy.o] Error 1
+//要注意指针在运算过程中的类型转换
+[lee@vultr C4]$ make
+gcc -Werror -Iinclude -std=c99 -c -o copy.o copy.c -MD -MF .copy.o.d
+cc1: warnings being treated as errors
+copy.c: In function ‘copy_n’:
+copy.c:26: error: assignment makes integer from pointer without a cast
+copy.c:38: error: assignment makes integer from pointer without a cast
+make: *** [copy.o] Error 1
+//要注意指针在运算过程中的类型转换
+[lee@vultr C4]$ make
+gcc -Werror -Iinclude -std=c99 -c -o copy.o copy.c -MD -MF .copy.o.d
+cc1: warnings being treated as errors
+copy.c: In function ‘copy_n’:
+copy.c:26: error: assignment makes integer from pointer without a cast
+make: *** [copy.o] Error 1
+
+[lee@vultr C4]$ make
+gcc -Werror -Iinclude -std=c99 -c -o copy.o copy.c -MD -MF .copy.o.d
+gcc -o test main.o prime.o square.o copy.o
+main.o: could not read symbols: File in wrong format
+collect2: ld returned 1 exit status
+make: *** [test] Error 1
+//可能是main.o文件遭到破坏，全部删除重新编译链接
+
