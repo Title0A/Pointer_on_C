@@ -1,6 +1,8 @@
-#include "copy.h"
+
 #include "main.h"
 
+#define d_nu   50
+#define s_nu   25
 
 void copy_n(char const dst[],char src[],int n){
 

@@ -1,5 +1,8 @@
-#include "square.h"
+
 #include "main.h"
+#define  val   0.00000 //阈值，根据需要设置差值体现精度
+#define   C   1
+
 double square(int i){
 	/*第二题，平方根函数*/
 	double a1= 1;

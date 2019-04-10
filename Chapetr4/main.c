@@ -3,6 +3,8 @@
 #include "square.h"
 #include "prime.h"
 #include "copy.h"
+#include "judge_tri.h"
+#include "chose_repeat_line.h"
 
 
 int main(){
@@ -22,6 +24,8 @@ int main(){
 	printf("\n the end result is %lf\n",p);
 	printf("/prime.c---------------------------------------\n");
 	prime(100);
+	printf("/judge_tri.c------------------------------------\n");
+	judge_tri(12,13,14);
 	printf("/copy_n.c---------------------------------------\n");
 	copy_n(dst,src,5);
 	//测出数组中元素的多少
@@ -32,6 +36,8 @@ int main(){
 	i = i/sizeof(char); 
 	
 	printf("main printf dst is :%s,src is :%s,copy %d char\n",dst,src,i);
+	printf("/chose_repeat_line.c---------------------------------------\n");
+	chose_repeat_line();
 
 
 	return 0;

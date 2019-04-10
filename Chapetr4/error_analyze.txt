@@ -229,3 +229,70 @@ collect2: ld returned 1 exit status
 make: *** [test] Error 1
 //可能是main.o文件遭到破坏，全部删除重新编译链接
 
+//chose_repeat_line.c------------------------------------------------------------
+gcc -Werror -Iinclude -std=c99 -c -o main.o main.c -MD -MF .main.o.d
+main.c:7:31: error: chose_line_repeat.h: No such file or directory
+cc1: warnings being treated as errors
+main.c: In function ‘main’:
+main.c:40: error: implicit declaration of function ‘chose_repeat_line’
+make: *** [main.o] Error 1
+ No such file or directory 检查拼写是否错误
+
+[lee@vultr C4]$ make
+gcc -Werror -Iinclude -std=c99 -c -o main.o main.c -MD -MF .main.o.d
+gcc -Werror -Iinclude -std=c99 -c -o chose_repeat_line.o chose_repeat_line.c -MD -MF .chose_repeat_line.o.d
+cc1: warnings being treated as errors
+chose_repeat_line.c: In function ‘chose_repeat_line’:
+chose_repeat_line.c:11: error: implicit declaration of function ‘gets’
+chose_repeat_line.c:11: error: ‘NULL’ undeclared (first use in this function)
+chose_repeat_line.c:11: error: (Each undeclared identifier is reported only once
+chose_repeat_line.c:11: error: for each function it appears in.)
+chose_repeat_line.c:11: error: comparison between pointer and integer
+chose_repeat_line.c:17: error: implicit declaration of function ‘strcmp’
+chose_repeat_line.c:21: error: implicit declaration of function ‘strcpy’
+chose_repeat_line.c:21: error: incompatible implicit declaration of built-in function ‘strcpy’
+chose_repeat_line.c:21: error: called object ‘output’ is not a function
+chose_repeat_line.c:31: error: implicit declaration of function ‘printf’
+chose_repeat_line.c:31: error: incompatible implicit declaration of built-in function ‘printf’
+chose_repeat_line.c:35: error: incompatible implicit declaration of built-in function ‘printf’
+make: *** [chose_repeat_line.o] Error 1
+注意包含各个库函数的头文件
+chose_repeat_line.c:11: error: comparison between pointer and integer ：注意字符串常量的使用
+通常不要拿字符串常量直接来用，使用一个字符指针指向它来用
+[lee@vultr C4]$ make
+gcc -Werror -Iinclude -std=c99 -c -o main.o main.c -MD -MF .main.o.d
+gcc -Werror -Iinclude -std=c99 -c -o prime.o prime.c -MD -MF .prime.o.d
+gcc -Werror -Iinclude -std=c99 -c -o square.o square.c -MD -MF .square.o.d
+gcc -Werror -Iinclude -std=c99 -c -o copy.o copy.c -MD -MF .copy.o.d
+gcc -Werror -Iinclude -std=c99 -c -o judge_tri.o judge_tri.c -MD -MF .judge_tri.o.d
+gcc -Werror -Iinclude -std=c99 -c -o chose_repeat_line.o chose_repeat_line.c -MD -MF .chose_repeat_line.o.d
+cc1: warnings being treated as errors
+chose_repeat_line.c: In function ‘chose_repeat_line’:
+chose_repeat_line.c:22: error: passing argument 1 of ‘strcmp’ makes pointer from integer without a cast
+/usr/include/string.h:143: note: expected ‘const char *’ but argument is of type ‘char’
+chose_repeat_line.c:22: error: passing argument 2 of ‘strcmp’ makes pointer from integer without a cast
+/usr/include/string.h:143: note: expected ‘const char *’ but argument is of type ‘char’
+chose_repeat_line.c:24: error: passing argument 1 of ‘strcmp’ makes pointer from integer without a cast
+/usr/include/string.h:143: note: expected ‘const char *’ but argument is of type ‘char’
+chose_repeat_line.c:24: error: passing argument 2 of ‘strcmp’ makes pointer from integer without a cast
+/usr/include/string.h:143: note: expected ‘const char *’ but argument is of type ‘char’
+make: *** [chose_repeat_line.o] Error 1
+strcmp的参数是指向字符串的指针
+
+[lee@vultr C4]$ make
+gcc -Werror -Iinclude -std=c99 -c -o chose_repeat_line.o chose_repeat_line.c -MD -MF .chose_repeat_line.o.d
+gcc -o test main.o prime.o square.o copy.o judge_tri.o chose_repeat_line.o
+chose_repeat_line.o: In function `chose_repeat_line':
+chose_repeat_line.c:(.text+0x40): warning: the `gets' function is dangerous and should not be used.
+/chose_repeat_line.c---------------------------------------
+This is the first line
+Another line
+and another
+and another
+Finished!
+output is : (null)
+Segmentation fault
+注意：printf函数在输出字符串的时候，需要一个指向字符串的指针
+
+
+

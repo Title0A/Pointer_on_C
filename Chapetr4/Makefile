@@ -1,6 +1,6 @@
 CC = gcc
 CFLASS = -Werror -Iinclude
-obj = main.o prime.o square.o copy.o
+obj = main.o prime.o square.o copy.o judge_tri.o chose_repeat_line.o
 
 dep_file := $(patsubst %,.%.d,$(obj))
 dep_file := $(wildcard $(dep_file))

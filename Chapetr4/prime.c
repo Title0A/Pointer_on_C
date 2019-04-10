@@ -1,5 +1,5 @@
 #include "main.h"
-#include "prime.h"
+
 
 
 void prime(int MAX){
