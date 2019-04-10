@@ -6,6 +6,7 @@
 #include "judge_tri.h"
 #include "chose_repeat_line.h"
 int substr(char dst[],char src[],int start ,int len);
+int deblank(char string[]);
 
 
 int main(){
@@ -15,7 +16,7 @@ int main(){
 	char src[s_nu] = "i love C very much";
 	char *d = dst;
 	char dst2[100];
-	char src2[] = "this_is_substr_test";
+	char src2[] = "this _  is   _substr_test ";
 	
 	printf("double's sizeof is :%d\n",sizeof(double));
 	printf("float's sizeof is :%d\n\n",sizeof(float));
@@ -44,6 +45,8 @@ int main(){
 	substr(dst2,src2,5,5);
 	printf("/chose_repeat_line.c---------------------------------------\n");
 	//chose_repeat_line();
+	printf("/deblank.c---------------------------------------\n");
+	deblank(src2);
 
 
 	return 0;
