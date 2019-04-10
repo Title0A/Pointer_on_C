@@ -5,6 +5,7 @@
 #include "copy.h"
 #include "judge_tri.h"
 #include "chose_repeat_line.h"
+int substr(char dst[],char src[],int start ,int len);
 
 
 int main(){
@@ -13,6 +14,8 @@ int main(){
 	char dst[d_nu];
 	char src[s_nu] = "i love C very much";
 	char *d = dst;
+	char dst2[100];
+	char src2[] = "this_is_substr_test";
 	
 	printf("double's sizeof is :%d\n",sizeof(double));
 	printf("float's sizeof is :%d\n\n",sizeof(float));
@@ -36,8 +39,11 @@ int main(){
 	i = i/sizeof(char); 
 	
 	printf("main printf dst is :%s,src is :%s,copy %d char\n",dst,src,i);
+	printf("/substr.c---------------------------------------\n");
+	printf("sizeof src2 is :%d\n",sizeof(src2));
+	substr(dst2,src2,5,5);
 	printf("/chose_repeat_line.c---------------------------------------\n");
-	chose_repeat_line();
+	//chose_repeat_line();
 
 
 	return 0;
