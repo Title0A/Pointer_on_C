@@ -1,10 +1,10 @@
 //#define NULL ((void *)0)
-#include <stdio.h>
+#include <stdio.h> //因为C语言各个文件是分开编译的，所以要对不太常用的声明包含头文件，比如NULL指针，要不然会报未声明错误
 
 
 char *find_char(char const *source, char const *chars)
 {
-#if 1 //���±����ð�
+#if 1 //用下标引用版
 	int j ;
 	if(!(source[0]))
 		return NULL;
@@ -22,7 +22,7 @@ char *find_char(char const *source, char const *chars)
 	}
 	return NULL;
 	
-#else  //��ȫָ���
+#else  //完全指针版
 
 	char *src =(char *)source;
 	char *chr =(char *)chars;
@@ -40,7 +40,7 @@ char *find_char(char const *source, char const *chars)
 			else
 				;
 		}
-		src =(char *)source; //ָ��Ҫָ��sourceͷ������һ���ж�
+		src =(char *)source; //指针要指回source头进行下一次判断
 		
 	}
 
