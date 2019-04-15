@@ -1,4 +1,4 @@
-DEP = main.o find_char.o
+DEP = main.o find_char.o del_substr.o
 CFLASS = -Werror
 CC = gcc
 test: $(DEP)
