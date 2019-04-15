@@ -8,6 +8,7 @@ void  reverse_string(char *string);
 
 
 char *find_char(char const *source, char const *chars);
+int Eratosthenes(void );
 
 
 int main()
@@ -26,5 +27,8 @@ int main()
 	printf("source string :%s ",source);
 	reverse_string(source);
 	printf("reverse_string :%s\n",source);
+
+	printf("Eratosthenes.c------------------------\n");
+	Eratosthenes();
 	return 0;
 }
