@@ -1,4 +1,4 @@
-DEP = main.o find_char.o del_substr.o reverse_string.o Eratosthenes.o
+DEP = main.o find_char.o del_substr.o reverse_string.o Eratosthenes.o Eratosthenes_2th.o
 CFLASS = -Werror
 CC = gcc
 test: $(DEP)

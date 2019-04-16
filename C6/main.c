@@ -9,6 +9,7 @@ void  reverse_string(char *string);
 
 char *find_char(char const *source, char const *chars);
 int Eratosthenes(void );
+int Eratosthenes_2th(void );
 
 
 int main()
@@ -30,5 +31,7 @@ int main()
 
 	printf("Eratosthenes.c------------------------\n");
 	Eratosthenes();
+	printf("Eratosthenes_2th.c------------------------\n");
+	Eratosthenes_2th();
 	return 0;
 }
